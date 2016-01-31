@@ -1,0 +1,6 @@
+Ac sliding animaion-: http://www.mysamplecode.com/2013/02/android-animation-switching-activity.html
+Ripple-: https://github.com/traex/RippleEffect
+fab:- https://android-arsenal.com/details/1/1684
+arsenal-: https://android-arsenal.com/tag/173
+fab2-: https://github.com/makovkastar/FloatingActionButton
+fab3-: https://github.com/futuresimple/android-floating-action-button
