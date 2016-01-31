@@ -1,0 +1,99 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.juqueen.flatshare.flatProfile">
+
+    <ImageView
+        android:layout_marginLeft="15dp"
+        android:layout_width="270dp"
+        android:layout_height="220dp"
+        android:id="@+id/imageView_flat_cover_pic"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/bg_home"
+        android:layout_alignEnd="@+id/linearLayout"
+        android:layout_alignParentStart="true" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="200dp"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="60dp"
+        android:id="@+id/linearLayout">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_flat_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/input_flat_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:hint="@string/hint_flat_name" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_flat_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/input_flat_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="@string/hint_flat_nickname" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_flat_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/input_flat_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text|date"
+                android:hint="@string/hint_flat_address" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <Button android:id="@+id/btn_create_flat"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_create_flat"
+            android:background="#000000"
+            android:layout_marginTop="40dp"
+            android:textColor="@android:color/white"/>
+
+
+
+    </LinearLayout>
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fabCoverPicAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:src="@drawable/fb_icon"
+        fab:fab_colorNormal="#ffffff"
+        fab:fab_colorPressed="#8c8c8c"
+        fab:fab_colorRipple="#8c8c8c"
+        fab:fab_label="facebook"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_alignBottom="@+id/imageView_flat_cover_pic"
+        android:layout_alignEnd="@+id/imageView_flat_cover_pic" />
+
+
+</RelativeLayout>

@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">FlatShare</string>
+
+    <string name="facebook_app_id">1529797137336080</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="title_activity_loading_screen">loading_screen</string>
+    <string name="hint_name">Full Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_dob">Date of Birth(dd/mm/yyyy)</string>
+    <string name="hint_contact_no">Contact Number (Optional)</string>
+    <string name="btn_create_profile">Create Profile</string>
+    <string name="err_msg_name">Enter your full name</string>
+    <string name="err_msg_email">Enter valid email address</string>
+
+    <string name="hint_flat_name">Flat Name</string>
+    <string name="hint_flat_nickname">Nickname for your flat/Group (Optional)</string>
+    <string name="hint_flat_address">Address (Optional)</string>
+    <string name="btn_create_flat">Create Flat/Group</string>
+
+    <string name="err_msg_dob">Enter valid Date of birth</string>
+    <string name="err_msg_contact_no">Enter valid Contact number</string>
+
+
+    <style name="loginButtonText">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:shadowColor">#ffffff</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">2</item>
+    </style>
+
+    <string name="title_activity_profile_creation">profileCreation</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_home">homeActivity</string>
+    <string name="title_activity_flat_list">flatList</string>
+    <string name="title_activity_flat_profile">flatProfile</string>
+
+</resources>

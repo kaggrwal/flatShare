@@ -1,0 +1,56 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.juqueen.flatshare.loadingScreen"
+    android:background="@drawable/bg_flat">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_flatshare_text"
+        android:background="@drawable/flatshare_text"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="Flatshare Text" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="4dp"
+        android:layout_below="@+id/imageView_flatshare_text"
+        android:background="@drawable/login_linearlayout_bg"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"
+        android:id="@+id/btnLinearLayout">
+
+    <Button
+        android:id="@+id/btnGplus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="4dp"
+        android:text="Sign in with Google+"
+        android:clickable="true"
+        android:background="@drawable/layers_btn_gplus_bg"/>
+
+
+    <Button
+        android:id="@+id/btnFb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="4dp"
+        android:text="Sign in with Facebook"
+        android:background="@drawable/layers_btn_fb_bg" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

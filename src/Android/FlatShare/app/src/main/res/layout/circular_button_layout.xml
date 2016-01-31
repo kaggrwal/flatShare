@@ -1,0 +1,8 @@
+<Button
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="45dip"
+    android:layout_marginTop="20dp"
+    android:layout_height="45dip"
+    android:background="@drawable/circular_button_selector"
+    android:textAppearance="?android:textAppearanceLarge"
+    android:textColor="@color/button_text_selector"/>
