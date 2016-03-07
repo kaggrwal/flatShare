@@ -1,5 +1,6 @@
 package com.juqueen.flatshare;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -78,6 +79,9 @@ public class profileCreation extends AppCompatActivity {
 
         new xmlProfile(inputName.getText().toString(), inputEmail.getText().toString(),
                 inputDOB.getText().toString(), inputContactNo.getText().toString(), this.getApplicationContext());
+
+        Intent intent = new Intent(profileCreation.this, homeActivity.class);
+        startActivity(intent);
 
         Toast.makeText(getApplicationContext(), "Profile Created", Toast.LENGTH_SHORT).show();
 

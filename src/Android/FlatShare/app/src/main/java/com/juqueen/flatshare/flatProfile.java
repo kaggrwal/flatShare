@@ -23,6 +23,8 @@ import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
 
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -34,8 +36,8 @@ public class flatProfile extends AppCompatActivity implements View.OnClickListen
 
 
     private static final int PICK_IMAGE_REQUEST = 1;
-    private EditText input_flat_name,input_flat_nickname,input_flat_address;
-    private TextInputLayout input_layout_flat_name,input_layout_flat_nickname,input_layout_flat_address;
+    private EditText input_flat_name, input_flat_nickname, input_flat_address;
+    private TextInputLayout input_layout_flat_name, input_layout_flat_nickname, input_layout_flat_address;
     private Button btnCreateGroup;
     private ImageView coverPic;
     private URI coverPicURI = null;
@@ -71,28 +73,45 @@ public class flatProfile extends AppCompatActivity implements View.OnClickListen
 
         int id = v.getId();
 
-        if(id == R.id.fabCoverPicAdd)
-        {
+        if (id == R.id.fabCoverPicAdd) {
             changePic();
-        }
-        else if(id == R.id.btn_create_flat)
-        {
+        } else if (id == R.id.btn_create_flat) {
             submitForm();
         }
-
 
 
     }
 
     private void submitForm() {
+        String ownerName;
 
 
         if (!validateFlatName()) {
             return;
         }
+
+        xmlProfile profile = new xmlProfile(null,null,null,null,this);
+
+        try {
+            profile.parseXMLAndStoreIt();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        ownerName = profile.getFullName();
+        flatData flatRow = new flatData(this.input_flat_name.getText().toString(),
+                this.input_flat_nickname.getText().toString(), this.input_flat_address.getText().toString(), ownerName, "Fake");
+   //     directoryCheck(this);
+        globalFlatDbManager manager = new globalFlatDbManager(this);
+        manager.addRow(flatRow);
         Toast.makeText(getApplicationContext(), "Group Created", Toast.LENGTH_SHORT).show();
 
     }
+
+
+
 
     private boolean validateFlatName() {
 
@@ -117,7 +136,7 @@ public class flatProfile extends AppCompatActivity implements View.OnClickListen
     private void changePic() {
 
 
-        final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
+        final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(flatProfile.this);
 
         builder.setTitle("Add Cover Pic!");
@@ -164,7 +183,6 @@ public class flatProfile extends AppCompatActivity implements View.OnClickListen
         builder.show();
 
     }
-
 
 
     @Override
@@ -279,6 +297,7 @@ public class flatProfile extends AppCompatActivity implements View.OnClickListen
 
         }
     }
+
     private class MyTextWatcher implements TextWatcher {
 
         private View view;

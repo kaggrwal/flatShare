@@ -44,7 +44,10 @@
         </activity>
         <activity
             android:name=".flatProfile"
-            android:label="@string/title_activity_flat_profile"></activity>
+            android:label="@string/title_activity_flat_profile" />
+        <activity
+            android:name=".flatActivity"
+            android:label="@string/title_activity_flat"></activity>
     </application>
 
 </manifest>

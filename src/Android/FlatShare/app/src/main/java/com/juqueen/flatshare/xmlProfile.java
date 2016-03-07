@@ -3,13 +3,17 @@ package com.juqueen.flatshare;
 import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.Environment;
 import android.util.Log;
 import android.util.Xml;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlSerializer;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -17,12 +21,18 @@ import java.io.IOException;
  * Created by Harmony on 12/17/2015.
  */
 public class xmlProfile {
-    private String fullName;
+
+
     private String email;
     private String dob;
+    private String fullName;
     private String contactNumber;
     private String MAC;
     private Context ctx;
+    private XmlPullParserFactory parserFactory;
+    public volatile boolean parsingComplete = true;
+
+
 
 
 
@@ -34,12 +44,16 @@ public class xmlProfile {
         this.contactNumber = _contactNumber;
         this.dob = _dob;
         this.ctx = _ctx;
-        WifiManager wifiMan = (WifiManager) ctx.getSystemService(
-                ctx.WIFI_SERVICE);
-        WifiInfo wifiInf = wifiMan.getConnectionInfo();
-        MAC = wifiInf.getMacAddress();
 
-        write_to_disk(ctx);
+
+        if(_fullName != null)
+        {
+            WifiManager wifiMan = (WifiManager) ctx.getSystemService(
+                    ctx.WIFI_SERVICE);
+            WifiInfo wifiInf = wifiMan.getConnectionInfo();
+            MAC = wifiInf.getMacAddress();
+            write_to_disk(ctx);
+        }
 
     }
 
@@ -48,7 +62,7 @@ public class xmlProfile {
 
         File dataDirectory = directoryCheck(ctx);
         File aboutXml = new File(dataDirectory,"about.xml");
-        //if (!aboutXml.exists()) {
+
             FileOutputStream ostream = null;
             try {
                 //if(checkExternalMedia()) {
@@ -63,32 +77,91 @@ public class xmlProfile {
             }
 
 
-        //}
-
-
-
-
     }
 
-    private boolean checkExternalMedia(){
-        boolean mExternalStorageAvailable = false;
-        boolean mExternalStorageWriteable = false;
-        String state = Environment.getExternalStorageState();
 
-        if (Environment.MEDIA_MOUNTED.equals(state)) {
-            // Can read and write the media
-            mExternalStorageAvailable = mExternalStorageWriteable = true;
-        } else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
-            // Can only read the media
-            mExternalStorageAvailable = true;
-            mExternalStorageWriteable = false;
-        } else {
-            // Can't read or write
-            mExternalStorageAvailable = mExternalStorageWriteable = false;
+
+    public String getFullName() {
+        return fullName;
+    }
+
+
+    public String getDob() {
+        return dob;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+
+    public String getMAC() {
+        return MAC;
+    }
+
+    public void parseXMLAndStoreIt() throws XmlPullParserException, FileNotFoundException {
+
+        parserFactory = XmlPullParserFactory.newInstance();
+        XmlPullParser myParser = parserFactory.newPullParser();
+        File dataDirectory = directoryCheck(ctx);
+        File aboutXml = new File(dataDirectory,"about.xml");
+        FileInputStream stream = new FileInputStream(aboutXml);
+        myParser.setInput(stream,null);
+
+        int event;
+        String text=null;
+
+        try {
+            event = myParser.getEventType();
+
+            while (event != XmlPullParser.END_DOCUMENT) {
+                String name=myParser.getName();
+
+                switch (event){
+                    case XmlPullParser.START_TAG:
+                        break;
+
+
+                    case XmlPullParser.TEXT:
+                        text = myParser.getText();
+                        break;
+
+
+                    case XmlPullParser.END_TAG:
+                        if(name.equals("FullName")){
+                            fullName = text;
+                        }
+
+                        else if(name.equals("Email")){
+                            email = text;
+                        }
+
+                        else if(name.equals("DOB")){
+                            dob = text;
+                        }
+
+                        else if(name.equals("ContactNo")){
+                            contactNumber = text;
+                        }
+                        else if(name.equals("MAC")){
+                            MAC = text;
+                        }
+
+                        else{
+                        }
+                        break;
+                }
+                event = myParser.next();
+            }
+            parsingComplete = false;
         }
 
-        return mExternalStorageWriteable;
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+
 
     private void xmlWriter(FileOutputStream ostream) {
 
@@ -103,11 +176,11 @@ public class xmlProfile {
 
             switch (i) {
                 case 1:
-                    serializer.startTag(null, "Full Name");
+                    serializer.startTag(null, "FullName");
 
                     serializer.text(fullName.toString());
 
-                    serializer.endTag(null, "Full Name");
+                    serializer.endTag(null, "FullName");
                     i++;
 
                 case 2:
@@ -129,12 +202,12 @@ public class xmlProfile {
                 case 4:
 
                     String temp;
-                    serializer.startTag(null, "Contact No");
+                    serializer.startTag(null, "ContactNo");
 
                     //temp = contactNumber.substring(contactNumber.length() / 2, 0) + contactNumber.substring((contactNumber.length() / 2) + 1, contactNumber.length() - 1);
                     serializer.text(contactNumber.toString());
 
-                    serializer.endTag(null, "Contact No");
+                    serializer.endTag(null, "ContactNo");
                     i++;
 
                 case 5:
@@ -178,6 +251,9 @@ public class xmlProfile {
 
 
     }
+
+
+
 
 
 }

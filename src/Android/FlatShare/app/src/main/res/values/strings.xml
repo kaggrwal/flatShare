@@ -42,5 +42,19 @@
     <string name="title_activity_home">homeActivity</string>
     <string name="title_activity_flat_list">flatList</string>
     <string name="title_activity_flat_profile">flatProfile</string>
+    <string name="title_activity_flat">flatActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="image">image</string>
+    <string name="desc">Being the savage\'s bowsman, that is, the person who pulled the
+    bow-oar in his boat. Dolor sit amet.</string>
+
+    <string name="italic">Friday 12 FEB.</string>
+    <string name="duplicate">DUPLICATE</string>
+    <string name="schedule">SCHEDULE</string>
+    <string name="delete">DELETE</string>
 
 </resources>
