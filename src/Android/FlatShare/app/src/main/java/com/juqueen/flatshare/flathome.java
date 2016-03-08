@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import io.codetail.animation.SupportAnimator;
 import io.codetail.animation.ViewAnimationUtils;
@@ -21,7 +22,7 @@ import io.codetail.animation.ViewAnimationUtils;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class flatHome extends Fragment implements View.OnClickListener{
+public class flatHome extends Fragment implements View.OnClickListener {
 
     ImageView imageView;
     ImageButton imageButton;
@@ -31,6 +32,8 @@ public class flatHome extends Fragment implements View.OnClickListener{
     boolean flag = true;
     View v;
     SupportAnimator mAnimator;
+    TextView name, nickName, address, flatId, owner;
+    flatData selectedFlatData;
 
 
     public flatHome() {
@@ -42,7 +45,7 @@ public class flatHome extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       v = inflater.inflate(R.layout.fragment_flat_home, container, false);
+        v = inflater.inflate(R.layout.fragment_flat_home, container, false);
 
 
         pixelDensity = getResources().getDisplayMetrics().density;
@@ -56,8 +59,46 @@ public class flatHome extends Fragment implements View.OnClickListener{
 
         alphaAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.alpha_anim);
 
+        name = (TextView) v.findViewById(R.id.tvName);
+        nickName = (TextView) v.findViewById(R.id.tvnickName);
+        flatId = (TextView) v.findViewById(R.id.tvFlaId);
+        address = (TextView) v.findViewById(R.id.tvAddress);
+        owner = (TextView) v.findViewById(R.id.tvOwner);
+        selectedFlatData = getArguments().getParcelable("selectedflat");
+
+        fillDetails(selectedFlatData);
+
 
         return v;
+    }
+
+    public void fillDetails(flatData selectedFlatData) {
+        if (!selectedFlatData.getName().isEmpty() ) {
+            name.setText(name.getText() + selectedFlatData.getName());
+        } else {
+            name.setText(name.getText() + "not provided");
+        }
+        if (!selectedFlatData.getNickName().isEmpty()) {
+            nickName.setText(nickName.getText() + selectedFlatData.getNickName());
+        } else {
+            nickName.setText(nickName.getText() + "not provided");
+        }
+        if (!selectedFlatData.getFlatId().isEmpty()) {
+            flatId.setText(flatId.getText() + selectedFlatData.getFlatId());
+        } else {
+            flatId.setText(flatId.getText() + "not provided");
+        }
+        if (!selectedFlatData.getAddress().isEmpty() ) {
+            address.setText(address.getText() + selectedFlatData.getAddress());
+        } else {
+            address.setText(address.getText() + "not provided");
+        }
+        if (!selectedFlatData.getOwnerName().isEmpty()) {
+            owner.setText(owner.getText() + selectedFlatData.getOwnerName());
+        } else {
+            owner.setText(owner.getText() + "not provided");
+        }
+
     }
 
     public void launchTwitter(View view) {
@@ -153,13 +194,13 @@ public class flatHome extends Fragment implements View.OnClickListener{
         mAnimator.start();
     }
 
-    public static flatHome newInstance(String text) {
+    public static flatHome newInstance(flatData flatData) {
 
         flatHome f = new flatHome();
-        //Bundle b = new Bundle();
-        //b.putString("msg", text);
+        Bundle b = new Bundle();
+        b.putParcelable("selectedflat", flatData);
 
-        //f.setArguments(b);
+        f.setArguments(b);
 
         return f;
     }
@@ -169,8 +210,7 @@ public class flatHome extends Fragment implements View.OnClickListener{
 
         int id = v.getId();
 
-        if(id == R.id.launchTwitterAnimation)
-        {
+        if (id == R.id.launchTwitterAnimation) {
             launchTwitter(v);
         }
 

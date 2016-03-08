@@ -77,7 +77,7 @@ public class loadingScreen extends ActionBarActivity {
             public void run() {
                 // Do something after 5s = 5000ms
 
-                if (IS_CONNECTED_INTERNET) {
+               // if (!IS_CONNECTED_INTERNET) {
 
                     if (!IS_LOGGED_IN) {
                         translateFlatshareText();
@@ -85,15 +85,15 @@ public class loadingScreen extends ActionBarActivity {
                     }
 
 
-                } else {
+               // } else {
 
-                    showAlertDialog(loadingScreen.this, "No Internet Connection",
-                            "You don't have internet connection" + "\n" + "Application will exit now", false);
-                    System.exit(0);
+                 //   showAlertDialog(loadingScreen.this, "No Internet Connection",
+                   //         "You don't have internet connection" + "\n" + "Application will exit now", false);
+                    //System.exit(0);
                 }
 
 
-            }
+            //}
 
 
         }, 2200);

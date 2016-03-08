@@ -95,7 +95,7 @@ public class flatList extends AppCompatActivity implements View.OnClickListener 
         for(flatData flatData : flatDatas)
         {
             String nickName = flatData.getNickName();
-            if(null != nickName || !nickName.isEmpty())
+            if(null != nickName && !nickName.isEmpty())
             {
                 itemName.add(flatData.getName()+"("+nickName+")");
             }
@@ -117,9 +117,12 @@ public class flatList extends AppCompatActivity implements View.OnClickListener 
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // TODO Auto-generated method stub
-                String Slecteditem = itemName.get(position);
-                Toast.makeText(getApplicationContext(), Slecteditem, Toast.LENGTH_SHORT).show();
+                flatData selectedflat = flatDatas.get(position);
+                Toast.makeText(getApplicationContext(), selectedflat.getName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(flatList.this,flatActivity.class);
+                //Bundle mBundle = new Bundle();
+                //mBundle.putParcelable("selectedflat", selectedflat);
+                intent.putExtra("selectedflat",selectedflat);
                 startActivity(intent);
 
 

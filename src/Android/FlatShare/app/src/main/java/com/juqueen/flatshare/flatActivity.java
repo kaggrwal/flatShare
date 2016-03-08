@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 
 public class flatActivity extends FragmentActivity {
 
+    flatData flatData;
 
     int NUMBER_SCREENS =3;
     @Override
@@ -18,7 +19,9 @@ public class flatActivity extends FragmentActivity {
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setAdapter(new myPageAdapter(getSupportFragmentManager()));
-        viewPager.setPageTransformer(true,new zoomOutPageTransformer());
+        viewPager.setPageTransformer(true, new zoomOutPageTransformer());
+        flatData = getIntent().getParcelableExtra("selectedflat");
+
     }
 
     class myPageAdapter extends FragmentPagerAdapter {
@@ -31,10 +34,10 @@ public class flatActivity extends FragmentActivity {
         public Fragment getItem(int position) {
             switch(position) {
 
-                case 0: return flatHome.newInstance("This is the Home activity");
+                case 0: return flatHome.newInstance(flatData);
                 case 1: return flatFriends.newInstance("This is the friends acivity");
                 case 2: return flatTimeline.newInstance("This is the timeline activity");
-                default: return flatFriends.newInstance("This is the Home activity");
+                default: return flatHome.newInstance(flatData);
             }
         }
 

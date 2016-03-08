@@ -101,6 +101,11 @@ public class flatProfile extends AppCompatActivity implements View.OnClickListen
         }
 
         ownerName = profile.getFullName();
+        if(ownerName == null)
+        {
+            ownerName ="";
+        }
+
         flatData flatRow = new flatData(this.input_flat_name.getText().toString(),
                 this.input_flat_nickname.getText().toString(), this.input_flat_address.getText().toString(), ownerName, "Fake");
    //     directoryCheck(this);
