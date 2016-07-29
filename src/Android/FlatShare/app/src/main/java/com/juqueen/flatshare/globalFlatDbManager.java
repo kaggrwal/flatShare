@@ -37,7 +37,7 @@ public class globalFlatDbManager extends SQLiteOpenHelper {
 
 
     public globalFlatDbManager(Context context) {
-     super(new DatabaseContext(context,"/flatshare/data/global"), DATABASE_NAME, null, DATABASE_VERSION);
+     super(new DatabaseContext(context,"/flatshare/data/global/"), DATABASE_NAME, null, DATABASE_VERSION);
      //  super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this._ctx = context;
 

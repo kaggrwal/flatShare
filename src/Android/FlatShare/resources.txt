@@ -8,3 +8,9 @@ fab3-: https://github.com/futuresimple/android-floating-action-button
 PageViewer- https://github.com/KENJU/ViewPagersWithMultipleFragmentsSample
 http://stackoverflow.com/questions/18413309/how-to-implement-a-viewpager-with-different-fragments-layouts
 http://developer.android.com/training/animation/screen-slide.html
+
+fam-: https://android-arsenal.com/details/1/1117
+
+services-: http://developer.android.com/guide/components/services.html
+
+gridview- http://www.androidhub4you.com/2013/07/custom-grid-view-example-in-android.html

@@ -38,6 +38,7 @@ public class loadingScreen extends ActionBarActivity {
 
     private boolean IS_CONNECTED_INTERNET = false;
     private boolean IS_LOGGED_IN = false;
+    private boolean IS_WFD_ENABLED = false;
     private ImageView flatshareText;
     private Button fbLogin;
     private CallbackManager callbackManager;
@@ -59,7 +60,9 @@ public class loadingScreen extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(loadingScreen.this, homeActivity.class);
+                Intent intent = new Intent(loadingScreen.this,WifiDirect.class);
+                startService(intent);
+                intent = new Intent(loadingScreen.this,profileCreation.class);
                 startActivity(intent);
 
 

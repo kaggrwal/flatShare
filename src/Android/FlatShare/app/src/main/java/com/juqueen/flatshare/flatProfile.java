@@ -1,5 +1,6 @@
 package com.juqueen.flatshare;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -14,6 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -85,6 +87,7 @@ public class flatProfile extends AppCompatActivity implements View.OnClickListen
     private void submitForm() {
         String ownerName;
 
+        localFlatDbManager.Path =  "/flatshare/data/flats/";
 
         if (!validateFlatName()) {
             return;
@@ -109,13 +112,51 @@ public class flatProfile extends AppCompatActivity implements View.OnClickListen
         flatData flatRow = new flatData(this.input_flat_name.getText().toString(),
                 this.input_flat_nickname.getText().toString(), this.input_flat_address.getText().toString(), ownerName, "Fake");
    //     directoryCheck(this);
+
+        flatMemberData memberRow = new flatMemberData(ownerName,profile.getDob(), "Owner", flatRow.getFlatId(), profile.getUn_ID() );
+
+        localFlatDbManager.DATABASE_NAME=flatRow.getFlatId()+"_LocalFlat.db";
+        localFlatDbManager.Path = localFlatDbManager.Path+flatRow.getFlatId()+"/";
+
         globalFlatDbManager manager = new globalFlatDbManager(this);
         manager.addRow(flatRow);
+        manager.close();
+
+
+        localFlatDbManager manager1 = new localFlatDbManager(this);
+        manager1.addRow(memberRow);
+        manager1.close();
+
         Toast.makeText(getApplicationContext(), "Group Created", Toast.LENGTH_SHORT).show();
+
+        dirStructureCreation(flatRow.getFlatId());
+
+        Intent intent = new Intent(flatProfile.this,flatList.class);
+        startActivity(intent);
+        finish();
+
 
     }
 
+    private void dirStructureCreation(String flatId) {
 
+       directoryCheck(this,"/flatshare/data/flats/"+flatId+"/members");
+    }
+
+
+    private File directoryCheck(Context ctx,String address) {
+
+        File dataDirectory = new File(ctx.getFilesDir()+address);
+        if (!dataDirectory.exists()) {
+            if (!dataDirectory.mkdirs()) {
+                Log.e("fladir ", "Problem creating direc");
+                return null;
+            }
+        }
+        return dataDirectory;
+
+
+    }
 
 
     private boolean validateFlatName() {

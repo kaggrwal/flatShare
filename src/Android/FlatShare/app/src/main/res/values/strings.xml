@@ -56,5 +56,6 @@
     <string name="duplicate">DUPLICATE</string>
     <string name="schedule">SCHEDULE</string>
     <string name="delete">DELETE</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
 
 </resources>

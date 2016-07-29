@@ -6,6 +6,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+
 
     <application
         android:allowBackup="true"
@@ -21,7 +27,6 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -39,7 +44,7 @@
             android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".flatList"
-            android:label="@string/title_activity_flat_list">
+            android:label="@string/title_activity_flat_list"
             android:theme="@style/Theme.AppCompat">
         </activity>
         <activity
@@ -47,7 +52,25 @@
             android:label="@string/title_activity_flat_profile" />
         <activity
             android:name=".flatActivity"
-            android:label="@string/title_activity_flat"></activity>
+            android:label="@string/title_activity_flat" />
+
+
+
+
+        <service android:name=".WifiDirect" />
+        <service android:name=".globalServerService" />
+
+        <receiver
+            android:enabled="true"
+            android:name=".BootUpReceiver"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

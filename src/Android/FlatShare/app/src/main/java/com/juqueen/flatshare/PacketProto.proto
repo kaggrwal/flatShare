@@ -1,0 +1,26 @@
+option java_outer_classname = "PacketProto";
+
+
+message Packet {
+
+  message Header {
+    
+    required int32 code = 1;
+    optional string intent = 2;
+    optional string data = 3;
+    optional int32 data_length =4;
+    
+  }
+
+  message Data {
+
+    optional int32 joinee_id = 5;
+    optional int32 unique_pckt_id = 6;
+
+  }
+  
+
+repeated Header header = 7;
+repeated Data data = 8;
+  
+}

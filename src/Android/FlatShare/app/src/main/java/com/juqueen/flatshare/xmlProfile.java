@@ -1,8 +1,6 @@
 package com.juqueen.flatshare;
 
 import android.content.Context;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.util.Log;
 import android.util.Xml;
 
@@ -16,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Random;
 
 /**
  * Created by Harmony on 12/17/2015.
@@ -27,7 +26,7 @@ public class xmlProfile {
     private String dob;
     private String fullName;
     private String contactNumber;
-    private String MAC;
+    private String un_ID;
     private Context ctx;
     private XmlPullParserFactory parserFactory;
     public volatile boolean parsingComplete = true;
@@ -48,12 +47,22 @@ public class xmlProfile {
 
         if(_fullName != null)
         {
-            WifiManager wifiMan = (WifiManager) ctx.getSystemService(
-                    ctx.WIFI_SERVICE);
-            WifiInfo wifiInf = wifiMan.getConnectionInfo();
-            MAC = wifiInf.getMacAddress();
+
+            generateID();
             write_to_disk(ctx);
         }
+
+    }
+
+    private void generateID() {
+
+        Random random = new Random();
+
+        String name = getFullName();
+        if (name != null || !name.isEmpty()) {
+            un_ID = name.charAt(0) + String.valueOf(random.nextInt(999999)) + name.charAt(name.length() - 1);
+        }
+
 
     }
 
@@ -95,8 +104,8 @@ public class xmlProfile {
     }
 
 
-    public String getMAC() {
-        return MAC;
+    public String getUn_ID() {
+        return un_ID;
     }
 
     public void parseXMLAndStoreIt() throws XmlPullParserException, FileNotFoundException {
@@ -143,8 +152,8 @@ public class xmlProfile {
                         else if(name.equals("ContactNo")){
                             contactNumber = text;
                         }
-                        else if(name.equals("MAC")){
-                            MAC = text;
+                        else if(name.equals("un_ID")){
+                            un_ID = text;
                         }
 
                         else{
@@ -212,11 +221,11 @@ public class xmlProfile {
 
                 case 5:
 
-                    serializer.startTag(null, "MAC");
+                    serializer.startTag(null, "un_ID");
 
-                    serializer.text(MAC.toString());
+                    serializer.text(un_ID.toString());
 
-                    serializer.endTag(null, "MAC");
+                    serializer.endTag(null, "un_ID");
                     i++;
                     break;
 
